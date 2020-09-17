@@ -1,3 +1,5 @@
+package ru.vsu.cs;
+
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,3 +1,5 @@
+package ru.vsu.cs;
+
 import java.awt.*;
 
 public interface Drawable {
