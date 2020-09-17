@@ -19,5 +19,6 @@ public class MainWindow extends JFrame {
         mw.setDefaultCloseOperation(EXIT_ON_CLOSE);
         mw.setSize(width, height);
         mw.setVisible(true);
+
     }
 }
