@@ -1,6 +1,8 @@
 package ru.vsu.cs;
 
 import ru.vsu.cs.Utils.DrawUtils;
+import ru.vsu.cs.line_drawers.DDALineDrawer;
+import ru.vsu.cs.pixel_drawers.GraphicsPixelDrawer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,9 +22,15 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
     public void paint(Graphics g) {
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics bi_g = bi.createGraphics();
-        LineDrawer ld = new GraphicsLineDrawer(bi_g);
+
+        LineDrawer ld = new DDALineDrawer(new GraphicsPixelDrawer(bi_g));
+
+        bi_g.fillRect(0,0,getWidth(),getHeight());
+
+        bi_g.setColor(Color.BLACK);
 
         drawAll(ld);
+
 
         g.drawImage(bi,0,0,null);
         bi_g.dispose();
@@ -31,7 +39,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
     }
 
     public void drawAll(LineDrawer ld){
-        DrawUtils.drawSnowFlake(ld,400,400,50,8);
+        DrawUtils.drawSnowFlake(ld,400,400,50,32);
         ld.drawLine(getWidth()/2, getHeight()/2, position.x, position.y);
     }
 

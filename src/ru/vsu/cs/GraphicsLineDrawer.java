@@ -1,7 +1,5 @@
 package ru.vsu.cs;
 
-import ru.vsu.cs.Utils.DrawUtils;
-
 import java.awt.*;
 
 public class GraphicsLineDrawer implements LineDrawer {
