@@ -4,7 +4,6 @@ import ru.vsu.cs.LineDrawer;
 import ru.vsu.cs.PixelDrawer;
 
 import java.awt.*;
-import java.text.CollationKey;
 
 public class WooLineDrawer implements LineDrawer {
 
@@ -17,51 +16,65 @@ public class WooLineDrawer implements LineDrawer {
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
 
-        double dx = Math.abs(x2 - x1);
-        double dy = Math.abs(y2 - y1);
+        int dx = (x2 > x1) ? (x2 - x1) : (x1 - x2);
+        int dy = (y2 > y1) ? (y2 - y1) : (y1 - y2);
 
-        if (x1 > x2){
-            int temp = x1;
-            x1 = x2;
-            x2 = temp;
-        }
+        if (dy < dx) {
+            if (x2 < x1) {
+                int temp = x1;
+                x1 = x2;
+                x2 = temp;
 
-        if (y1 > y2){
-            int temp = y1;
-            y1 = y2;
-            y2 = temp;
-        }
+                temp = y1;
+                y1 = y2;
+                y2 = temp;
+            }
 
-        Color color = new Color(0, 0, 0, 255);
+            double gradient = (double) dy / dx;
+            if (y2 < y1) gradient *= -1;
+            double iy = y1 + gradient;
 
-        pd.setPixel(x1, y1, color);
-        pd.setPixel(x2, y2, color);
+            Color color = new Color(0, 1, 0, 1f);
+            pd.setPixel(x1, y1, color);
+            pd.setPixel(x2, y2, color);
 
+            for (int x = x1 + 1; x < x2; x++) {
+                color = new Color(0, 1, 0, (float) (1 - (iy - (int) iy)));
+                pd.setPixel(x, (int) iy, color);
 
-        if (dx > dy) {
-            double gradient = dy / dx;
-            double y = y1 + gradient;
-            for (int i = x1 + 1; i < x2; i++) {
-                color = new Color(0, 0, 0, (float) (1 - (y - (int) y)));
-                pd.setPixel(i, (int) y, color);
+                color = new Color(0, 1, 0, (float) (iy - (int) iy));
+                pd.setPixel(x, (int) iy + 1, color);
 
-                color = new Color(0, 0, 0, (float) (y - (int) y));
-                pd.setPixel(i, (int) y + 1, color);
-                y += gradient;
+                iy += gradient;
             }
         } else {
-            double gradient = dx / dy;
-            double x = x1 + gradient;
-            for (int i = y1 + 1; i < y2; i++) {
-                color = new Color(0, 0, 0, (float) (1 - (x - (int) x)));
-                pd.setPixel((int) x, i, color);
+            if (y2 < y1) {
+                int temp = x1;
+                x1 = x2;
+                x2 = temp;
 
-                color = new Color(0, 0, 0, (float) (x - (int) x));
-                pd.setPixel((int) x + 1, i, color);
-                x += gradient;
+                temp = y1;
+                y1 = y2;
+                y2 = temp;
             }
 
-        }
+            double gradient = (double) dx / dy;
+            if (x2 < x1) gradient *= -1;
+            double ix = x1 + gradient;
 
+            Color color = new Color(1, 0, 0, 1f);
+
+            pd.setPixel(x1, y1, color);
+            pd.setPixel(x2, y2, color);
+            for (int y = y1 + 1; y < y2; y++) {
+                color = new Color(1, 0, 0, (float) (1 - (ix - (int) ix)));
+                pd.setPixel((int) ix, y, color);
+
+                color = new Color(1, 0, 0, (float) (ix - (int) ix));
+                pd.setPixel((int) ix + 1, y, color);
+
+                ix += gradient;
+            }
+        }
     }
 }

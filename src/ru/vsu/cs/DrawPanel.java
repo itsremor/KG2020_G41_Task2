@@ -1,6 +1,7 @@
 package ru.vsu.cs;
 
 import ru.vsu.cs.Utils.DrawUtils;
+import ru.vsu.cs.line_drawers.BriesenhamLineDrawer;
 import ru.vsu.cs.line_drawers.WooLineDrawer;
 import ru.vsu.cs.pixel_drawers.GraphicsPixelDrawer;
 
@@ -12,7 +13,7 @@ import java.awt.image.BufferedImage;
 
 public class DrawPanel extends JPanel implements MouseMotionListener {
 
-    private Point position = new Point(100,100);
+    private Point position = new Point(700,100);
 
     public DrawPanel() {
         this.addMouseMotionListener(this);
