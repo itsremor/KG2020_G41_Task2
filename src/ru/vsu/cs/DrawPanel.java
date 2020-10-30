@@ -1,7 +1,7 @@
 package ru.vsu.cs;
 
 import ru.vsu.cs.Utils.DrawUtils;
-import ru.vsu.cs.line_drawers.DDALineDrawer;
+import ru.vsu.cs.line_drawers.WooLineDrawer;
 import ru.vsu.cs.pixel_drawers.GraphicsPixelDrawer;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 
 public class DrawPanel extends JPanel implements MouseMotionListener {
 
-    private Point position = new Point(0,0);
+    private Point position = new Point(100,100);
 
     public DrawPanel() {
         this.addMouseMotionListener(this);
@@ -23,7 +23,7 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics bi_g = bi.createGraphics();
 
-        LineDrawer ld = new DDALineDrawer(new GraphicsPixelDrawer(bi_g));
+        LineDrawer ld = new WooLineDrawer(new GraphicsPixelDrawer(bi_g));
 
         bi_g.fillRect(0,0,getWidth(),getHeight());
 
@@ -45,7 +45,8 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) { //с нажатой кнопкой
-
+//        position = new Point(e.getX(), e.getY());
+//        repaint();
     }
 
     @Override
@@ -53,4 +54,5 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
         position = new Point(e.getX(), e.getY());
         repaint();
     }
+
 }
