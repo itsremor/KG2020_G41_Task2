@@ -20,13 +20,17 @@ public class WooLineDrawer implements LineDrawer {
         double dx = Math.abs(x2 - x1);
         double dy = Math.abs(y2 - y1);
 
-        int ix;
-        int iy;
+        if (x1 > x2){
+            int temp = x1;
+            x1 = x2;
+            x2 = temp;
+        }
 
-        if (x1 < x2) ix = 1;
-        else ix = -1;
-        if (y1 < y2) iy = 1;
-        else iy = -1;
+        if (y1 > y2){
+            int temp = y1;
+            y1 = y2;
+            y2 = temp;
+        }
 
         Color color = new Color(0, 0, 0, 255);
 
