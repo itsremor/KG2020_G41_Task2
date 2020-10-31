@@ -30,8 +30,9 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
         LineDrawer ldDDA = new DDALineDrawer(new GraphicsPixelDrawer(bi_g));
 
         bi_g.fillRect(0,0,getWidth(),getHeight());
-
         bi_g.setColor(Color.BLACK);
+        bi_g.drawString("Green is DDA, Blue is Woo, Red is Briesenham", 5, 10);
+
 
         drawAll(ldWoo, ldBr, ldDDA);
 
