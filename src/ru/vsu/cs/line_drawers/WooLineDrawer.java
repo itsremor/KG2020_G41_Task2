@@ -16,10 +16,10 @@ public class WooLineDrawer implements LineDrawer {
     @Override
     public void drawLine(int x1, int y1, int x2, int y2) {
 
-        int dx = (x2 > x1) ? (x2 - x1) : (x1 - x2);
-        int dy = (y2 > y1) ? (y2 - y1) : (y1 - y2);
+        int dx = Math.abs(x2 - x1);
+        int dy = Math.abs(y2 - y1);
 
-        if (dy < dx) {
+        if (dx > dy) {
             if (x2 < x1) {
                 int temp = x1;
                 x1 = x2;
@@ -34,15 +34,15 @@ public class WooLineDrawer implements LineDrawer {
             if (y2 < y1) gradient *= -1;
             double iy = y1 + gradient;
 
-            Color color = new Color(0, 1, 0, 1f);
+            Color color = new Color(0, 0, 1, 1f);
             pd.setPixel(x1, y1, color);
             pd.setPixel(x2, y2, color);
 
             for (int x = x1 + 1; x < x2; x++) {
-                color = new Color(0, 1, 0, (float) (1 - (iy - (int) iy)));
+                color = new Color(0, 0, 1, (float) (1 - (iy - (int) iy)));
                 pd.setPixel(x, (int) iy, color);
 
-                color = new Color(0, 1, 0, (float) (iy - (int) iy));
+                color = new Color(0, 0, 1, (float) (iy - (int) iy));
                 pd.setPixel(x, (int) iy + 1, color);
 
                 iy += gradient;
@@ -67,10 +67,10 @@ public class WooLineDrawer implements LineDrawer {
             pd.setPixel(x1, y1, color);
             pd.setPixel(x2, y2, color);
             for (int y = y1 + 1; y < y2; y++) {
-                color = new Color(1, 0, 0, (float) (1 - (ix - (int) ix)));
+                color = new Color(0, 0, 1, (float) (1 - (ix - (int) ix)));
                 pd.setPixel((int) ix, y, color);
 
-                color = new Color(1, 0, 0, (float) (ix - (int) ix));
+                color = new Color(0, 0, 1, (float) (ix - (int) ix));
                 pd.setPixel((int) ix + 1, y, color);
 
                 ix += gradient;

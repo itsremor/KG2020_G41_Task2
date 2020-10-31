@@ -27,7 +27,7 @@ public class DDALineDrawer implements LineDrawer {
 
             for (int j = x1; j <= x2; j++) {
                 double i = k * (j-x1) + y1;
-                pd.setPixel(j, (int)i, Color.RED);
+                pd.setPixel(j, (int)i, Color.GREEN);
             }
 
 

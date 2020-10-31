@@ -2,6 +2,7 @@ package ru.vsu.cs;
 
 import ru.vsu.cs.Utils.DrawUtils;
 import ru.vsu.cs.line_drawers.BriesenhamLineDrawer;
+import ru.vsu.cs.line_drawers.DDALineDrawer;
 import ru.vsu.cs.line_drawers.WooLineDrawer;
 import ru.vsu.cs.pixel_drawers.GraphicsPixelDrawer;
 
@@ -24,13 +25,15 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics bi_g = bi.createGraphics();
 
-        LineDrawer ld = new WooLineDrawer(new GraphicsPixelDrawer(bi_g));
+        LineDrawer ldWoo = new WooLineDrawer(new GraphicsPixelDrawer(bi_g));
+        LineDrawer ldBr = new BriesenhamLineDrawer(new GraphicsPixelDrawer(bi_g));
+        LineDrawer ldDDA = new DDALineDrawer(new GraphicsPixelDrawer(bi_g));
 
         bi_g.fillRect(0,0,getWidth(),getHeight());
 
         bi_g.setColor(Color.BLACK);
 
-        drawAll(ld);
+        drawAll(ldWoo, ldBr, ldDDA);
 
 
         g.drawImage(bi,0,0,null);
@@ -39,9 +42,11 @@ public class DrawPanel extends JPanel implements MouseMotionListener {
 
     }
 
-    public void drawAll(LineDrawer ld){
-        DrawUtils.drawSnowFlake(ld,400,400,50,32);
-        ld.drawLine(getWidth()/2, getHeight()/2, position.x, position.y);
+    public void drawAll(LineDrawer ld1, LineDrawer ld2, LineDrawer ld3){
+        //DrawUtils.drawSnowFlake(ld1,400,400,50,32);
+        ld1.drawLine(getWidth()/3, getHeight()/3, position.x, position.y);
+        ld2.drawLine(getWidth()/2, getHeight()/2, position.x, position.y);
+        ld3.drawLine(getWidth()/5, getHeight()/2, position.x, position.y);
     }
 
     @Override

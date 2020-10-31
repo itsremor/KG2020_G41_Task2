@@ -32,7 +32,7 @@ public class BriesenhamLineDrawer implements LineDrawer {
 
         if(dx > dy) {
             for (int i = 1; i < dx; i++) {
-                pd.setPixel((int)x,(int)y, Color.GREEN);
+                pd.setPixel((int)x,(int)y, Color.RED);
                 x += ix;
                 dif += dy * 2;
                 if(dif > dx){
